@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import{SolicitudPagoService} from './Services/solicitud-pago.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,22 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Pagos';
+
+  pagos:any;
+
+  constructor(public SolicitudPagoService:SolicitudPagoService){
+
+
+  }
+
+  ngOnInit() {
+
+    this.SolicitudPagoService.addPagos().subscribe(
+      r=>{
+        this.pagos=r;
+        console.log(r)
+      },
+      e=>{console.error(e)}
+    )
+  }
 }
